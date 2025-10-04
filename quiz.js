@@ -67,3 +67,35 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(id).addEventListener("focus", () => showResult("", false));
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const question = document.getElementById("question");
+  const options = document.querySelectorAll(".option");
+  const feedback = document.getElementById("feedback");
+
+  // Example question
+  const currentQuestion = {
+    text: "What is 2 + 2?",
+    options: ["3", "4", "5"],
+    correct: "4"
+  };
+
+  question.textContent = currentQuestion.text;
+  options.forEach((btn, index) => {
+    btn.textContent = currentQuestion.options[index];
+    btn.addEventListener("click", () => {
+      if (checkAnswer(btn.textContent, currentQuestion.correct)) {
+        feedback.textContent = "✅ Correct!";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = "❌ Wrong!";
+        feedback.style.color = "red";
+      }
+    });
+  });
+});
+
+// Required function
+function checkAnswer(userAnswer, correctAnswer) {
+  return userAnswer === correctAnswer;
+}
